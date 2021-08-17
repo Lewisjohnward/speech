@@ -57,9 +57,9 @@ export const TestAudio = () => {
         preload="auto"
         
       />
-      {/* <Waveform audio={audio} time={currentTime} duration={duration}/>
+      <Waveform audio={audio} time={currentTime} duration={duration}/>
       <WaveformBars audio={audio} time={currentTime} duration={duration}/>
-      <TestAudioLine time={currentTime} duration={duration}/> */}
+      <TestAudioLine time={currentTime} duration={duration}/>
       
     </>
   );
