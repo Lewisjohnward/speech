@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/speech/static/css/main.8bdb6708.chunk.css",
+    "main.js": "/speech/static/js/main.45dd2c08.chunk.js",
+    "main.js.map": "/speech/static/js/main.45dd2c08.chunk.js.map",
+    "runtime-main.js": "/speech/static/js/runtime-main.5b41ab9e.js",
+    "runtime-main.js.map": "/speech/static/js/runtime-main.5b41ab9e.js.map",
+    "static/js/2.cb0f078c.chunk.js": "/speech/static/js/2.cb0f078c.chunk.js",
+    "static/js/2.cb0f078c.chunk.js.map": "/speech/static/js/2.cb0f078c.chunk.js.map",
+    "static/js/3.5ac3a4e5.chunk.js": "/speech/static/js/3.5ac3a4e5.chunk.js",
+    "static/js/3.5ac3a4e5.chunk.js.map": "/speech/static/js/3.5ac3a4e5.chunk.js.map",
+    "index.html": "/speech/index.html",
+    "static/css/main.8bdb6708.chunk.css.map": "/speech/static/css/main.8bdb6708.chunk.css.map",
+    "static/js/2.cb0f078c.chunk.js.LICENSE.txt": "/speech/static/js/2.cb0f078c.chunk.js.LICENSE.txt",
+    "static/media/veroeproprio.f8a40d8b.wav": "/speech/static/media/veroeproprio.f8a40d8b.wav"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5b41ab9e.js",
+    "static/js/2.cb0f078c.chunk.js",
+    "static/css/main.8bdb6708.chunk.css",
+    "static/js/main.45dd2c08.chunk.js"
+  ]
+}
