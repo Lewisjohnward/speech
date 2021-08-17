@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { Waveform } from "./Waveform";
 import { BiMicrophoneOff, BiMicrophone } from "react-icons/bi";
 import { AiOutlineDownload } from "react-icons/ai";
+import { WaveformBars } from "./WaveformBars";
+import { TestAudioLine } from "./TestAudioLine";
 
 navigator.userMedia =
   navigator.getUserMedia ||
@@ -11,6 +13,7 @@ navigator.userMedia =
 
 export function AudioRecorder() {
   const [playing, setPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [audioStream, setAudioStream] = useState(null);
   const [recorder, setRecorder] = useState(null);
   const [audioUrl, setAudioUrl] = useState(null);
@@ -18,6 +21,7 @@ export function AudioRecorder() {
   const [currentTime, setCurrentTime] = useState(0);
 
   const audioPlayer = useRef();
+  const animationRef = useRef()
 
   useEffect(() => {
     if (recorder) {
@@ -47,6 +51,36 @@ export function AudioRecorder() {
     setDuration(seconds);
   }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
 
+  useEffect(() => {
+    const seconds = audioPlayer.current.duration.toFixed(2);
+    console.log(seconds)
+    setDuration(seconds);
+  }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
+
+  const togglePlay = () => {
+    const prevValue = isPlaying;
+    setIsPlaying(!prevValue);
+    if (!prevValue) {
+      animationRef.current = requestAnimationFrame(whilePlaying);
+    } else {
+      cancelAnimationFrame(animationRef.current);
+    }
+  };
+
+  const whilePlaying = () => {
+    changePlayerCurrentTime()
+    animationRef.current = requestAnimationFrame(whilePlaying);
+  };
+
+  const finishedPlaying = () => {
+    setIsPlaying(false);
+    setCurrentTime(0);
+    audioPlayer.current.currentTime = 0;
+  };
+
+  const changePlayerCurrentTime = () => {
+    setCurrentTime(audioPlayer.current.currentTime);
+  };
   const startVideo = async () => {
     setPlaying(true);
     const mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -62,14 +96,16 @@ export function AudioRecorder() {
     setTimeout(() => {
       recorder.stop();
     }, 500);
-    
   };
 
   return (
     <div className="app">
       <div className="app__container">
         <audio
-          onPlay={() => setPlaying(true)}
+          onPlay={togglePlay}
+          onPause={togglePlay}
+          onEnded={finishedPlaying}
+          preload="auto"
           ref={audioPlayer}
           controls
           className="app_audio"
@@ -91,9 +127,16 @@ export function AudioRecorder() {
       {audioUrl && (
         <>
           <Waveform audio={audioUrl} time={currentTime} duration={duration} />
-          <a href={audioUrl} download={`user-audio.mp3`}>
+          {/* <a href={audioUrl} download={`user-audio.mp3`}>
             <AiOutlineDownload />
           </a>
+          <Waveform audio={audioUrl} time={currentTime} duration={duration} />
+          <WaveformBars
+            audio={audioUrl}
+            time={currentTime}
+            duration={duration}
+          />
+          <TestAudioLine time={currentTime} duration={duration} /> */}
         </>
       )}
     </div>
