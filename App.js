@@ -24,30 +24,30 @@ navigator.userMedia =
         (stream) => {
             let video = document.getElementsByClassName('app__videoFeed')[0];
             video.srcObject = stream
-            console.log(stream)
+            
             mediaRecorder = new MediaRecorder(stream)
             let chunks = []
-            console.log("Starting recording")
+            
             mediaRecorder.start()
 
             setTimeout(() => {
               mediaRecorder.stop()
-              console.log("End recording")
+              
               let video = document.getElementsByClassName('app__videoFeed')[0];
 		          video.srcObject.getTracks()[0].stop();
             }, 2000)
             
             mediaRecorder.ondataavailable = function(ev) {
               chunks.push(ev.data)
-              console.log("pushing chunks")
+              
             }
 
             mediaRecorder.onstop = (ev) => {
               let blob = new Blob(chunks, {'type': 'audio/wav'})
-              console.log(blob)
+              
               chunks = []
               let audioUrl = window.URL.createObjectURL(blob)
-              console.log(audioUrl)
+              
               video.src = audioUrl
             }
 

@@ -9,7 +9,7 @@ mic.continuous = true;
 mic.interimResults = true;
 mic.lang = "en-US";
 
-console.log(window);
+
 
 function SpeechRecognitionApp() {
   const [isListening, setIsListening] = useState(false);
@@ -24,28 +24,28 @@ function SpeechRecognitionApp() {
     if (isListening) {
       mic.start();
       mic.onend = () => {
-        console.log("continue..");
+        
         mic.start();
       };
     } else {
       mic.stop();
       mic.onend = () => {
-        console.log("Stopped Mic on Click");
+        
       };
     }
     mic.onstart = () => {
-      console.log("Mic is recording");
+      
     };
 
     mic.onresult = (event) => {
-      console.log(event)
+      
       const transcript = Array.from(event.results)
         .map((result) => result[0])
         .map((result) => result.transcript)
         .join("");
         setNote(transcript)
         mic.onerror = event => {
-          console.log(event.error)
+          
         }
     };
   };
