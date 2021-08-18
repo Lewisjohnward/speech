@@ -20,3 +20,69 @@ code {
   justify-content: center;
   align-items: center;
 }
+
+#audioPlayer {
+  display: flex;
+  align-items: center;
+  background: chocolate ;
+  color: white;
+  justify-content: center;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.replayIcon{
+  padding-right: 5px;
+  padding-left: 5px;
+  font-size: 25px;
+}
+
+#audioControls{
+  background: chocolate ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 5px;
+
+}
+
+.microphoneButton{
+  padding-right: 5px;
+  padding-left: 5px;
+  font-size: 25px;
+}
+
+
+#options{
+
+}
+
+#options.icon{
+  font-size: 30px;
+}
+
+.bin{
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+.icon{
+  cursor: pointer;
+}
+.icon:hover{
+  cursor: pointer;
+  scale: 1.2
+}
+
+.thumbsIconContainer{
+  display: flex;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.thumb{
+  
+  padding: 10px;
+  font-size: 25px;
+}

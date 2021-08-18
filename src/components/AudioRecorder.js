@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Waveform } from "./Waveform";
-import { BiMicrophoneOff, BiMicrophone } from "react-icons/bi";
-import { AiOutlineDownload } from "react-icons/ai";
-import { WaveformBars } from "./WaveformBars";
-import { TestAudioLine } from "./TestAudioLine";
+import { ReplayIcon } from "./ReplayIcon";
+import { BinIcon } from "./BinIcon";
+import { MicrophoneIcon } from "./MicrophoneIcon";
+import { ThumbsIcon } from "./ThumbsIcon";
 
 navigator.userMedia =
   navigator.getUserMedia ||
@@ -19,9 +19,10 @@ export function AudioRecorder() {
   const [audioUrl, setAudioUrl] = useState(null);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [replay, setReplay] = useState(false);
 
   const audioPlayer = useRef();
-  const animationRef = useRef()
+  const animationRef = useRef();
 
   useEffect(() => {
     if (recorder) {
@@ -46,17 +47,16 @@ export function AudioRecorder() {
     audio.src = audioUrl;
   }, [audioUrl]);
 
-  useEffect(() => {
-    const seconds = Math.floor(audioPlayer.current.duration);
-    setDuration(seconds);
-  }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
 
   useEffect(() => {
     const seconds = audioPlayer.current.duration.toFixed(2);
-    console.log(seconds)
     setDuration(seconds);
   }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
 
+
+  const handleDelete = () => {
+    setAudioUrl(null);
+  };
   const togglePlay = () => {
     const prevValue = isPlaying;
     setIsPlaying(!prevValue);
@@ -68,7 +68,7 @@ export function AudioRecorder() {
   };
 
   const whilePlaying = () => {
-    changePlayerCurrentTime()
+    changePlayerCurrentTime();
     animationRef.current = requestAnimationFrame(whilePlaying);
   };
 
@@ -99,8 +99,14 @@ export function AudioRecorder() {
   };
 
   return (
-    <div className="app">
-      <div className="app__container">
+    <div className="app" >
+      <div id="audioControls">
+        <BinIcon handleDelete={handleDelete} />
+        <MicrophoneIcon
+          playing={playing}
+          stopVideo={stopVideo}
+          startVideo={startVideo}
+        />
         <audio
           onPlay={togglePlay}
           onPause={togglePlay}
@@ -109,21 +115,11 @@ export function AudioRecorder() {
           ref={audioPlayer}
           controls
           className="app_audio"
+          loop={replay ? true : false}
         ></audio>
+        <ReplayIcon replay={replay} setReplay={setReplay} />
       </div>
-
-      <div className="app__input">
-        {playing ? (
-          <button onClick={stopVideo}>
-            <BiMicrophoneOff />
-          </button>
-        ) : (
-          <button onClick={startVideo}>
-            <BiMicrophone />
-          </button>
-        )}
-      </div>
-
+      <ThumbsIcon />
       {audioUrl && (
         <>
           <Waveform audio={audioUrl} time={currentTime} duration={duration} />
