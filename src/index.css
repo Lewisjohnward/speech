@@ -86,3 +86,9 @@ code {
   padding: 10px;
   font-size: 25px;
 }
+
+.svg-label{
+  font-size: 10px;
+  font-style: italic;
+}
+

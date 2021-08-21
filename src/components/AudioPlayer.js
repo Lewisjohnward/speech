@@ -3,18 +3,15 @@ import audio2 from "../audio/02-Non ho più dormito bene da quando ho ritrovato 
 import audio3 from "../audio/03-e più di una volta mi sono veramente doman-dato se fossi diventato pazzo o se lo diventerò.mp3";
 import audio4 from "../audio/04- In un certo senso sarebbe stato tutto più misericordioso se non avessi avuto l_oggetto qui, nel mio studio, dove posso guardarlo e prenderlo in mano e soppesarlo se voglio.mp3";
 import { useEffect, useState, useRef } from "react";
-import { Waveform } from "./Waveform";
-import { WaveformBars } from "./WaveformBars";
 import { ReplayIcon } from "./ReplayIcon";
-import { RandomIcon } from "./RandomIcon";
+import { AudioWindow } from "./AudioWindow";
 
-
-export const TestAudio = () => {
+export const AudioPlayer = () => {
   const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [replay, setReplay] = useState(false);
-  const [trackNum, setTrackNum] = useState(false);
+  const [trackNum, setTrackNum] = useState(0);
 
   const audioPlayer = useRef(); //Ref for out audio component
   const animationRef = useRef();
@@ -28,8 +25,10 @@ export const TestAudio = () => {
     const prevValue = isPlaying;
     setIsPlaying(!prevValue);
     if (!prevValue) {
+      audioPlayer.current.play();
       animationRef.current = requestAnimationFrame(whilePlaying);
     } else {
+      audioPlayer.current.pause();
       cancelAnimationFrame(animationRef.current);
     }
   };
@@ -48,35 +47,51 @@ export const TestAudio = () => {
   const changePlayerCurrentTime = () => {
     setCurrentTime(audioPlayer.current.currentTime);
   };
-  
-  useEffect(() => {
-    
-    setTrackNum(Math.floor(Math.random() * tracks.length))
-  }, [])
-  
-  const tracks = [audio1, audio2, audio3, audio4]
-  const audio = tracks[trackNum]
 
+  useEffect(() => {
+    changeTrack();
+  }, []);
+
+  const changeTrack = () => {
+    setTrackNum(Math.floor(Math.random() * tracks.length));
+  };
+
+  const randomiseTrack = () => {
+    changeTrack();
+  };
+  const activateReplay = () => {
+    const replayPrev = replay;
+    setReplay(!replayPrev);
+  };
+
+  const tracks = [audio1, audio2, audio3, audio4];
+  const audio = tracks[trackNum];
+
+  console.log("%cTestAudio.js line:70 audio", "color: #007acc;", audio);
   return (
     <>
       <div id="audioPlayer">
-        <RandomIcon />
         <audio
-          onPlay={togglePlay}
-          onPause={togglePlay}
           onEnded={finishedPlaying}
           ref={audioPlayer}
-          controls
-          className="app_audio"
           src={audio}
           loop={replay ? true : false}
           preload="auto"
         />
-        <ReplayIcon replay={replay} setReplay={setReplay} />
       </div>
-      {trackNum}
-      <Waveform audio={audio} time={currentTime} duration={duration} />
-      <WaveformBars audio={audio} time={currentTime} duration={duration} />
+      {`${trackNum} /  ${tracks.length}`}
+
+      <AudioWindow
+        togglePlay={togglePlay}
+        isPlaying={isPlaying}
+        onEnded={finishedPlaying}
+        replay={replay}
+        setReplay={activateReplay}
+        audio={audio}
+        time={currentTime}
+        duration={duration}
+        randomiseTrack={randomiseTrack}
+      />
     </>
   );
 };

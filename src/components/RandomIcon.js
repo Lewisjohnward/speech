@@ -1,11 +1,11 @@
 import { IoDiceOutline } from "react-icons/io5";
 
-export const RandomIcon = () => {
+export const RandomIcon = ({randomiseTrack}) => {
   return (
     <div>
       <IoDiceOutline
-        className="replayIcon icon"
         color="white"
+        onClick={randomiseTrack}
       />
     </div>
   );

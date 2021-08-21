@@ -1,8 +1,23 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import WaveformData from "waveform-data";
 import { scaleLinear, scaleBand, min, max, range } from "d3";
 
-export const WaveformBars = ({ audio, time, duration}) => {
+const width = 1200;
+const height = 200;
+
+const margin = {
+  top: 10,
+  right: 10,
+  bottom: 10,
+  left: 10,
+};
+
+const innerHeight = height - margin.top - margin.bottom;
+const innerWidth = width - margin.left - margin.right;
+
+const innerHeight1 = innerHeight / 2;
+
+export const WaveformBars = ({ audio, time, duration }) => {
   const [waveform, setWaveform] = useState(null);
 
   useEffect(() => {
@@ -15,7 +30,7 @@ export const WaveformBars = ({ audio, time, duration}) => {
           const options = {
             audio_context: audioContext,
             array_buffer: buffer,
-            scale: 512, //64 128 256 152
+            scale: 1024, //64 128 256 152
           };
 
           return new Promise((resolve, reject) => {
@@ -34,24 +49,23 @@ export const WaveformBars = ({ audio, time, duration}) => {
     }
   }, [audio]);
 
-  if (!waveform) {
-    return null;
+  if (!waveform || !audio) {
+    return (
+    <svg height={height} width={width}>
+      <rect height={height} width={width} stroke="black" fill="none" />
+      <g transform={`translate(${margin.left}, ${margin.top})`}>
+        <text className="svg-label">Waveform</text>
+        <rect
+          height={innerHeight}
+          width={innerWidth}
+          stroke="black"
+          strokeWidth={0.05}
+          fill="none"
+        />
+      </g>
+    </svg>
+    )
   }
-
-  const width = 1200;
-  const height = 200;
-
-  const margin = {
-    top: 10,
-    right: 10,
-    bottom: 10,
-    left: 10,
-  };
-
-  const innerHeight = height - margin.top - margin.bottom;
-  const innerWidth = width - margin.left - margin.right;
-
-  const innerHeight1 = innerHeight / 2;
 
   const channel = waveform.channel(0);
 
@@ -66,21 +80,22 @@ export const WaveformBars = ({ audio, time, duration}) => {
 
   //ranground
   const yScale1 = scaleLinear()
-    .domain([0, max(max1, d => d)])
+    .domain([0, max(max1, (d) => d)])
     .range([innerHeight1, 0])
-    .nice()
+    .nice();
 
   const yScale2 = scaleLinear()
-    .domain([0, min(min1, d => d)])
+    .domain([0, min(min1, (d) => d)])
     .range([innerHeight, innerHeight1])
-    .nice()
+    .nice();
 
-    const lineScale = scaleLinear().domain([0, duration]).range([0, innerWidth]);
+  const lineScale = scaleLinear().domain([0, duration]).range([0, innerWidth]);
   return (
     <>
       <svg height={height} width={width}>
         <rect height={height} width={width} stroke="black" fill="none" />
         <g transform={`translate(${margin.left}, ${margin.top})`}>
+          <text className="svg-label">Waveform</text>
           <rect
             height={innerHeight}
             width={innerWidth}
@@ -94,7 +109,7 @@ export const WaveformBars = ({ audio, time, duration}) => {
               <rect
                 fill="greenyellow"
                 stroke="black"
-                strokeWidth={0.1}
+                strokeWidth={0.05}
                 x={xScale(i)}
                 y={yScale1(d)}
                 width={xScale.bandwidth()}
@@ -107,7 +122,7 @@ export const WaveformBars = ({ audio, time, duration}) => {
               <rect
                 fill="greenyellow"
                 stroke="black"
-                strokeWidth={0.1}
+                strokeWidth={0.05}
                 x={xScale(i)}
                 y={innerHeight1}
                 width={xScale.bandwidth()}

@@ -1,7 +1,8 @@
 import React from "react";
-import { AudioRecorder } from "./components/AudioRecorder";
 import {Options} from "./components/OptionsIcon";
-import { TestAudio } from "./components/TestAudio";
+import { AudioPlayer } from "./components/AudioPlayer";
+import { TestRecorder } from "./components/TestRecorder";
+import { AudioRecorder } from "./components/AudioRecorder";
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
           allowfullscreen
         ></iframe> */}
         <AudioRecorder />
-        <TestAudio />
+        <AudioPlayer/>
+        <TestRecorder />
       </div>
     </>
   );
