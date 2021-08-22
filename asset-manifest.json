@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/speech/static/css/main.fee7bdac.chunk.css",
-    "main.js": "/speech/static/js/main.d7c4981e.chunk.js",
-    "main.js.map": "/speech/static/js/main.d7c4981e.chunk.js.map",
+    "main.css": "/speech/static/css/main.de794944.chunk.css",
+    "main.js": "/speech/static/js/main.2039065a.chunk.js",
+    "main.js.map": "/speech/static/js/main.2039065a.chunk.js.map",
     "runtime-main.js": "/speech/static/js/runtime-main.d5fd30ab.js",
     "runtime-main.js.map": "/speech/static/js/runtime-main.d5fd30ab.js.map",
-    "static/js/2.269e04f1.chunk.js": "/speech/static/js/2.269e04f1.chunk.js",
-    "static/js/2.269e04f1.chunk.js.map": "/speech/static/js/2.269e04f1.chunk.js.map",
+    "static/js/2.e9701d8c.chunk.js": "/speech/static/js/2.e9701d8c.chunk.js",
+    "static/js/2.e9701d8c.chunk.js.map": "/speech/static/js/2.e9701d8c.chunk.js.map",
     "static/js/3.8a58e4ba.chunk.js": "/speech/static/js/3.8a58e4ba.chunk.js",
     "static/js/3.8a58e4ba.chunk.js.map": "/speech/static/js/3.8a58e4ba.chunk.js.map",
     "index.html": "/speech/index.html",
-    "static/css/main.fee7bdac.chunk.css.map": "/speech/static/css/main.fee7bdac.chunk.css.map",
-    "static/js/2.269e04f1.chunk.js.LICENSE.txt": "/speech/static/js/2.269e04f1.chunk.js.LICENSE.txt",
+    "static/css/main.de794944.chunk.css.map": "/speech/static/css/main.de794944.chunk.css.map",
+    "static/js/2.e9701d8c.chunk.js.LICENSE.txt": "/speech/static/js/2.e9701d8c.chunk.js.LICENSE.txt",
     "static/media/01-È un grande sollievo scriverne.e253fcbf.mp3": "/speech/static/media/01-È un grande sollievo scriverne.e253fcbf.mp3",
     "static/media/02-Non ho più dormito bene da quando ho ritrovato mio zio Otto morto.37ee7dfc.mp3": "/speech/static/media/02-Non ho più dormito bene da quando ho ritrovato mio zio Otto morto.37ee7dfc.mp3",
     "static/media/03-e più di una volta mi sono veramente doman-dato se fossi diventato pazzo o se lo diventerò.5db87318.mp3": "/speech/static/media/03-e più di una volta mi sono veramente doman-dato se fossi diventato pazzo o se lo diventerò.5db87318.mp3",
-    "static/media/04- In un certo senso sarebbe stato tutto più misericordioso se non avessi avuto l_oggetto qui, nel mio studio, dove posso guardarlo e prenderlo in mano e soppesarlo se voglio.6b53639b.mp3": "/speech/static/media/04- In un certo senso sarebbe stato tutto più misericordioso se non avessi avuto l_oggetto qui, nel mio studio, dove posso guardarlo e prenderlo in mano e soppesarlo se voglio.6b53639b.mp3"
+    "static/media/04- In un certo senso sarebbe stato tutto più misericordioso se non avessi avuto l_oggetto qui, nel mio studio.6b53639b.mp3": "/speech/static/media/04- In un certo senso sarebbe stato tutto più misericordioso se non avessi avuto l_oggetto qui, nel mio studio.6b53639b.mp3"
   },
   "entrypoints": [
     "static/js/runtime-main.d5fd30ab.js",
-    "static/js/2.269e04f1.chunk.js",
-    "static/css/main.fee7bdac.chunk.css",
-    "static/js/main.d7c4981e.chunk.js"
+    "static/js/2.e9701d8c.chunk.js",
+    "static/css/main.de794944.chunk.css",
+    "static/js/main.2039065a.chunk.js"
   ]
 }
