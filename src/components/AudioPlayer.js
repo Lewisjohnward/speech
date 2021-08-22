@@ -1,10 +1,9 @@
 import audio1 from "../audio/01-È un grande sollievo scriverne.mp3";
 import audio2 from "../audio/02-Non ho più dormito bene da quando ho ritrovato mio zio Otto morto.mp3";
 import audio3 from "../audio/03-e più di una volta mi sono veramente doman-dato se fossi diventato pazzo o se lo diventerò.mp3";
-import audio4 from "../audio/04- In un certo senso sarebbe stato tutto più misericordioso se non avessi avuto l_oggetto qui, nel mio studio, dove posso guardarlo e prenderlo in mano e soppesarlo se voglio.mp3";
+import audio4 from "../audio/04- In un certo senso sarebbe stato tutto più misericordioso se non avessi avuto l_oggetto qui, nel mio studio.mp3";
 import { useEffect, useState, useRef } from "react";
-import { ReplayIcon } from "./ReplayIcon";
-import { AudioWindow } from "./AudioWindow";
+import { AudioPlayerWindow } from "./AudioPlayerWindow";
 
 export const AudioPlayer = () => {
   const [duration, setDuration] = useState(0);
@@ -67,7 +66,12 @@ export const AudioPlayer = () => {
   const tracks = [audio1, audio2, audio3, audio4];
   const audio = tracks[trackNum];
 
-  console.log("%cTestAudio.js line:70 audio", "color: #007acc;", audio);
+
+  console.log(typeof audio1)
+
+  const regex = /(?<=\-).*?(?=\.)/
+  const text = audio.match(regex)[0].replace("_", "'")
+
   return (
     <>
       <div id="audioPlayer">
@@ -79,9 +83,8 @@ export const AudioPlayer = () => {
           preload="auto"
         />
       </div>
-      {`${trackNum} /  ${tracks.length}`}
-
-      <AudioWindow
+      <AudioPlayerWindow
+        text={text}
         togglePlay={togglePlay}
         isPlaying={isPlaying}
         onEnded={finishedPlaying}
@@ -91,6 +94,7 @@ export const AudioPlayer = () => {
         time={currentTime}
         duration={duration}
         randomiseTrack={randomiseTrack}
+        trackNum={trackNum}
       />
     </>
   );

@@ -17,7 +17,7 @@ const innerWidth = width - margin.left - margin.right;
 
 const innerHeight1 = innerHeight / 2;
 
-export const WaveformBars = ({ audio, time, duration }) => {
+export const WaveformBars = ({ audio, time, duration, trackNum }) => {
   const [waveform, setWaveform] = useState(null);
 
   useEffect(() => {
@@ -51,20 +51,20 @@ export const WaveformBars = ({ audio, time, duration }) => {
 
   if (!waveform || !audio) {
     return (
-    <svg height={height} width={width}>
-      <rect height={height} width={width} stroke="black" fill="none" />
-      <g transform={`translate(${margin.left}, ${margin.top})`}>
-        <text className="svg-label">Waveform</text>
-        <rect
-          height={innerHeight}
-          width={innerWidth}
-          stroke="black"
-          strokeWidth={0.05}
-          fill="none"
-        />
-      </g>
-    </svg>
-    )
+      <svg height={height} width={width}>
+        <rect height={height} width={width} stroke="black" fill="none" />
+        <g transform={`translate(${margin.left}, ${margin.top})`}>
+          <text className="svg-label">Waveform</text>
+          <rect
+            height={innerHeight}
+            width={innerWidth}
+            stroke="black"
+            strokeWidth={0.05}
+            fill="none"
+          />
+        </g>
+      </svg>
+    );
   }
 
   const channel = waveform.channel(0);
@@ -95,6 +95,14 @@ export const WaveformBars = ({ audio, time, duration }) => {
       <svg height={height} width={width}>
         <rect height={height} width={width} stroke="black" fill="none" />
         <g transform={`translate(${margin.left}, ${margin.top})`}>
+          <text
+            x={innerWidth}
+            style={{ textAnchor: "end" }}
+            className="svg-label"
+            opacity={0.4}
+          >
+            {trackNum}
+          </text>
           <text className="svg-label">Waveform</text>
           <rect
             height={innerHeight}

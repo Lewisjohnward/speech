@@ -1,8 +1,53 @@
 import { useState, useEffect, useRef } from "react";
+import styled from "styled-components";
+import { GrPause, GrPlay } from "react-icons/gr";
 import { WaveformBars } from "./WaveformBars";
 import { ReplayIcon } from "./ReplayIcon";
 import { BinIcon } from "./BinIcon";
 import { MicrophoneIcon } from "./MicrophoneIcon";
+
+const PlayBackContainer = styled.div`
+  display: flex;
+`;
+
+const PlayerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-size: 25px;
+  background: black;
+  color: white;
+  stroke: white;
+  border-radius: 5px 0px 0px 5px;
+
+  polygon {
+    stroke: currentColor;
+  }
+  path {
+    stroke: currentColor;
+  }
+
+  svg:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+`;
+
+const VoteContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-size: 25px;
+
+  svg:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+`;
 
 navigator.userMedia =
   navigator.getUserMedia ||
@@ -10,7 +55,7 @@ navigator.userMedia =
   navigator.mozGetUserMedia ||
   navigator.msGetUserMedia;
 
-export function AudioRecorder() {
+export const AudioRecorder = () => {
   const [playing, setPlaying] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioStream, setAudioStream] = useState(null);
@@ -42,16 +87,9 @@ export function AudioRecorder() {
   }, [recorder]);
 
   useEffect(() => {
-    const audio = document.getElementsByClassName("app_audio")[0];
-    audio.src = audioUrl;
-  }, [audioUrl]);
-
-
-  useEffect(() => {
     const seconds = audioPlayer.current.duration.toFixed(2);
     setDuration(seconds);
   }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
-
 
   const handleDelete = () => {
     setAudioUrl(null);
@@ -60,8 +98,10 @@ export function AudioRecorder() {
     const prevValue = isPlaying;
     setIsPlaying(!prevValue);
     if (!prevValue) {
+      audioPlayer.current.play();
       animationRef.current = requestAnimationFrame(whilePlaying);
     } else {
+      audioPlayer.current.pause();
       cancelAnimationFrame(animationRef.current);
     }
   };
@@ -96,45 +136,48 @@ export function AudioRecorder() {
       recorder.stop();
     }, 500);
   };
+  const activateReplay = () => {
+    const replayPrev = replay;
+    setReplay(!replayPrev);
+  };
 
   return (
-    <div className="app" >
-      <div id="audioControls">
-        <BinIcon handleDelete={handleDelete} />
-        <MicrophoneIcon
-          playing={playing}
-          stopVideo={stopVideo}
-          startVideo={startVideo}
-        />
-        
-        <audio
-          onPlay={togglePlay}
-          onPause={togglePlay}
-          onEnded={finishedPlaying}
-          preload="auto"
-          ref={audioPlayer}
-          controls
-          className="app_audio"
-          loop={replay ? true : false}
-        />
-        <ReplayIcon replay={replay} setReplay={setReplay} />
-      </div>
-      
-      {audioUrl && (
-        <>
-          <WaveformBars audio={audioUrl} time={currentTime} duration={duration} />
-          {/* <a href={audioUrl} download={`user-audio.mp3`}>
-            <AiOutlineDownload />
-          </a>
-          <Waveform audio={audioUrl} time={currentTime} duration={duration} />
+    <div>
+      <div>
+        <PlayBackContainer>
+          <audio
+            onEnded={finishedPlaying}
+            preload="auto"
+            ref={audioPlayer}
+            src={audioUrl}
+            loop={replay ? true : false}
+          />
+          <PlayerContainer>
+            <MicrophoneIcon
+              playing={playing}
+              stopVideo={stopVideo}
+              startVideo={startVideo}
+            />
+            {audioUrl &&
+              <>
+                <div onClick={togglePlay}>
+                  {isPlaying ? <GrPause /> : <GrPlay />}
+                </div>
+                <ReplayIcon replay={replay} setReplay={activateReplay} />
+              </>
+            }
+          </PlayerContainer>
+          <VoteContainer>
+            <BinIcon handleDelete={handleDelete} />
+          </VoteContainer>
+
           <WaveformBars
             audio={audioUrl}
             time={currentTime}
             duration={duration}
           />
-          <TestAudioLine time={currentTime} duration={duration} /> */}
-        </>
-      )}
+        </PlayBackContainer>
+      </div>
     </div>
   );
-}
+};

@@ -6,6 +6,7 @@ import { FaRegSadCry } from "react-icons/fa";
 import { BiHappyAlt } from "react-icons/bi";
 import { ReplayIcon } from "./ReplayIcon";
 import { WaveformBars } from "./WaveformBars";
+import { ItFlagIcon } from "./other/ItFlagIcon";
 
 const PlayBackContainer = styled.div`
   display: flex;
@@ -50,7 +51,25 @@ const VoteContainer = styled.div`
   }
 `;
 
-export const AudioWindow = ({
+const WindowContainer = styled.div`
+
+
+`;
+const IconContainer = styled.div`
+  margin-bottom: 0px;
+`;
+
+const TestContainer = styled.div`
+  display: flex;
+  margin-left: 90px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+
+`
+
+export const AudioPlayerWindow = ({
+  text,
   togglePlay,
   replay,
   setReplay,
@@ -59,21 +78,36 @@ export const AudioWindow = ({
   duration,
   isPlaying,
   randomiseTrack,
+  trackNum,
 }) => {
   return (
-    <PlayBackContainer>
-      <PlayerContainer>
-        <div onClick={togglePlay}>{isPlaying ? <GrPause /> : <GrPlay />}</div>
-        <ReplayIcon replay={replay} setReplay={setReplay} />
-        <GiPerspectiveDiceSixFacesFour onClick={randomiseTrack} />
-      </PlayerContainer>
-      <VoteContainer>
-        <BiHappyAlt />
-        <FiThumbsDown />
-        <FiThumbsUp />
-        <FaRegSadCry />
-      </VoteContainer>
-      <WaveformBars audio={audio} time={time} duration={duration} />
-    </PlayBackContainer>
+    <WindowContainer>
+      <TestContainer>
+        <p>{text}</p>
+        <IconContainer>
+          <ItFlagIcon />
+        </IconContainer>
+      </TestContainer>
+
+      <PlayBackContainer>
+        <PlayerContainer>
+          <div onClick={togglePlay}>{isPlaying ? <GrPause /> : <GrPlay />}</div>
+          <ReplayIcon replay={replay} setReplay={setReplay} />
+          <GiPerspectiveDiceSixFacesFour onClick={randomiseTrack} />
+        </PlayerContainer>
+        <VoteContainer>
+          <BiHappyAlt />
+          <FiThumbsUp />
+          <FiThumbsDown />
+          <FaRegSadCry />
+        </VoteContainer>
+        <WaveformBars
+          trackNum={trackNum}
+          audio={audio}
+          time={time}
+          duration={duration}
+        />
+      </PlayBackContainer>
+    </WindowContainer>
   );
 };
