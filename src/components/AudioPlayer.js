@@ -2,6 +2,9 @@ import audio1 from "../audio/01-È un grande sollievo scriverne.mp3";
 import audio2 from "../audio/02-Non ho più dormito bene da quando ho ritrovato mio zio Otto morto.mp3";
 import audio3 from "../audio/03-e più di una volta mi sono veramente doman-dato se fossi diventato pazzo o se lo diventerò.mp3";
 import audio4 from "../audio/04- In un certo senso sarebbe stato tutto più misericordioso se non avessi avuto l_oggetto qui, nel mio studio.mp3";
+import audio5 from "../audio/05- dove posso guardarlo e prenderlo in mano e soppesarlo se voglio.  Io non voglio.mp3";
+import audio6 from "../audio/06-Non vorrei toccarlo. Ma a volte lo faccio.mp3";
+import audio7 from "../audio/veroeproprio.wav";
 import { useEffect, useState, useRef } from "react";
 import { AudioPlayerWindow } from "./AudioPlayerWindow";
 
@@ -63,11 +66,8 @@ export const AudioPlayer = () => {
     setReplay(!replayPrev);
   };
 
-  const tracks = [audio1, audio2, audio3, audio4];
+  const tracks = [audio1, audio2, audio3, audio4, audio5, audio6, audio7];
   const audio = tracks[trackNum];
-
-
-  console.log(typeof audio1)
 
   const regex = /(?<=\-).*?(?=\.)/
   const text = audio.match(regex)[0].replace("_", "'")
