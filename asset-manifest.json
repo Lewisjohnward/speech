@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/speech/static/css/main.643604d5.chunk.css",
-    "main.js": "/speech/static/js/main.2fb13323.chunk.js",
-    "main.js.map": "/speech/static/js/main.2fb13323.chunk.js.map",
+    "main.js": "/speech/static/js/main.8de27cac.chunk.js",
+    "main.js.map": "/speech/static/js/main.8de27cac.chunk.js.map",
     "runtime-main.js": "/speech/static/js/runtime-main.d5fd30ab.js",
     "runtime-main.js.map": "/speech/static/js/runtime-main.d5fd30ab.js.map",
     "static/js/2.e9701d8c.chunk.js": "/speech/static/js/2.e9701d8c.chunk.js",
@@ -15,12 +15,15 @@
     "static/media/01-È un grande sollievo scriverne.e253fcbf.mp3": "/speech/static/media/01-È un grande sollievo scriverne.e253fcbf.mp3",
     "static/media/02-Non ho più dormito bene da quando ho ritrovato mio zio Otto morto.37ee7dfc.mp3": "/speech/static/media/02-Non ho più dormito bene da quando ho ritrovato mio zio Otto morto.37ee7dfc.mp3",
     "static/media/03-e più di una volta mi sono veramente doman-dato se fossi diventato pazzo o se lo diventerò.5db87318.mp3": "/speech/static/media/03-e più di una volta mi sono veramente doman-dato se fossi diventato pazzo o se lo diventerò.5db87318.mp3",
-    "static/media/04- In un certo senso sarebbe stato tutto più misericordioso se non avessi avuto l_oggetto qui, nel mio studio.6b53639b.mp3": "/speech/static/media/04- In un certo senso sarebbe stato tutto più misericordioso se non avessi avuto l_oggetto qui, nel mio studio.6b53639b.mp3"
+    "static/media/04- In un certo senso sarebbe stato tutto più misericordioso se non avessi avuto l_oggetto qui, nel mio studio.6b53639b.mp3": "/speech/static/media/04- In un certo senso sarebbe stato tutto più misericordioso se non avessi avuto l_oggetto qui, nel mio studio.6b53639b.mp3",
+    "static/media/05- dove posso guardarlo e prenderlo in mano e soppesarlo se voglio.  Io non voglio.8eae7810.mp3": "/speech/static/media/05- dove posso guardarlo e prenderlo in mano e soppesarlo se voglio.  Io non voglio.8eae7810.mp3",
+    "static/media/06-Non vorrei toccarlo. Ma a volte lo faccio.d8c5d4e9.mp3": "/speech/static/media/06-Non vorrei toccarlo. Ma a volte lo faccio.d8c5d4e9.mp3",
+    "static/media/veroeproprio.f8a40d8b.wav": "/speech/static/media/veroeproprio.f8a40d8b.wav"
   },
   "entrypoints": [
     "static/js/runtime-main.d5fd30ab.js",
     "static/js/2.e9701d8c.chunk.js",
     "static/css/main.643604d5.chunk.css",
-    "static/js/main.2fb13323.chunk.js"
+    "static/js/main.8de27cac.chunk.js"
   ]
 }
