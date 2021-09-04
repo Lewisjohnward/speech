@@ -24,3 +24,6 @@ yarn-error.log*
 
 ## redundent components
 /redundent-components
+
+## backend
+/backend

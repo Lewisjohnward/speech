@@ -96,3 +96,7 @@ code {
   font-style: italic;
 }
 
+.loginContainer{
+  display: flex;
+  flex-direction: column;
+}
