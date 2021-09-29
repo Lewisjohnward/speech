@@ -1,14 +1,8 @@
-import audio1 from "../audio/01-È un grande sollievo scriverne.mp3";
-import audio2 from "../audio/02-Non ho più dormito bene da quando ho ritrovato mio zio Otto morto.mp3";
-import audio3 from "../audio/03-e più di una volta mi sono veramente doman-dato se fossi diventato pazzo o se lo diventerò.mp3";
-import audio4 from "../audio/04- In un certo senso sarebbe stato tutto più misericordioso se non avessi avuto l_oggetto qui, nel mio studio.mp3";
-import audio5 from "../audio/05- dove posso guardarlo e prenderlo in mano e soppesarlo se voglio.  Io non voglio.mp3";
-import audio6 from "../audio/06-Non vorrei toccarlo. Ma a volte lo faccio.mp3";
-import audio7 from "../audio/veroeproprio.wav";
-import { useEffect, useState, useRef } from "react";
-import { AudioPlayerWindow } from "./AudioPlayerWindow";
+import { useState, useEffect, useRef } from "react";
 
-export const AudioPlayer = () => {
+import { AudioPlayerWindow } from "../AudioPlayerWindow";
+import { AudioRecorder } from "../AudioRecorder";
+export const AudioWindow = ({ audioUrl, text, thumbsUp, thumbsDown }) => {
   const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -17,11 +11,17 @@ export const AudioPlayer = () => {
 
   const audioPlayer = useRef(); //Ref for out audio component
   const animationRef = useRef();
+  const testAudioPlayer = useRef()
 
   useEffect(() => {
     const seconds = audioPlayer.current.duration.toFixed(2);
     setDuration(seconds);
   }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
+
+  useEffect(() => {
+    console.log('audioUrl changed');
+    setIsPlaying(false)
+  }, [audioUrl]);
 
   const togglePlay = () => {
     const prevValue = isPlaying;
@@ -50,30 +50,11 @@ export const AudioPlayer = () => {
     setCurrentTime(audioPlayer.current.currentTime);
   };
 
-  useEffect(() => {
-    changeTrack();
-  }, []);
-
-  const changeTrack = () => {
-    setTrackNum(Math.floor(Math.random() * tracks.length));
-  };
-
-  const randomiseTrack = () => {
-    changeTrack();
-  };
   const activateReplay = () => {
     const replayPrev = replay;
     setReplay(!replayPrev);
   };
 
-  const tracks = [audio1, audio2, audio3, audio4, audio5, audio6, audio7];
-  const audio = tracks[trackNum];
-
-  const regex = /(?<=\-).*?(?=\.)/;
-  // const text = audio.match(regex)[0].replace("_", "'")
-  const text = "test";
-
-  console.log(audio);
 
   return (
     <>
@@ -81,24 +62,25 @@ export const AudioPlayer = () => {
         <audio
           onEnded={finishedPlaying}
           ref={audioPlayer}
-          src={audio}
+          src={audioUrl}
           loop={replay ? true : false}
           preload="auto"
         />
       </div>
       <AudioPlayerWindow
-        text={audio}
+        text={text}
         togglePlay={togglePlay}
         isPlaying={isPlaying}
         onEnded={finishedPlaying}
         replay={replay}
         setReplay={activateReplay}
-        audio={audio}
+        audio={audioUrl}
         time={currentTime}
         duration={duration}
-        randomiseTrack={randomiseTrack}
-        trackNum={trackNum}
+        thumbsUp={thumbsUp}
+        thumbsDown={thumbsDown}
       />
+      {/* <AudioRecorder /> */}
     </>
   );
 };

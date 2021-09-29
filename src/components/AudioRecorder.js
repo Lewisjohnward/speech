@@ -142,7 +142,6 @@ export const AudioRecorder = () => {
   };
 
   return (
-    <div>
       <div>
         <PlayBackContainer>
           <audio
@@ -178,6 +177,5 @@ export const AudioRecorder = () => {
           />
         </PlayBackContainer>
       </div>
-    </div>
   );
 };

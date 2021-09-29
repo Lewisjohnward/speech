@@ -7,9 +7,11 @@ import { BiHappyAlt } from "react-icons/bi";
 import { ReplayIcon } from "./ReplayIcon";
 import { WaveformBars } from "./WaveformBars";
 import { ItFlagIcon } from "./other/ItFlagIcon";
+import { AudioRecorder } from "./AudioRecorder";
 
 const PlayBackContainer = styled.div`
   display: flex;
+  max-width: 1305px;
 `;
 
 const PlayerContainer = styled.div`
@@ -23,6 +25,7 @@ const PlayerContainer = styled.div`
   color: white;
   stroke: white;
   border-radius: 5px 0px 0px 5px;
+  
 
   polygon {
     stroke: currentColor;
@@ -51,21 +54,20 @@ const VoteContainer = styled.div`
   }
 `;
 
-const WindowContainer = styled.div`
-
-
-`;
 const IconContainer = styled.div`
   margin-bottom: 0px;
 `;
 
 const TestContainer = styled.div`
   display: flex;
-  margin-left: 90px;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   font-size: 15px;
+`;
 
+const Text = styled.p`
+  word-wrap: break-word;
 `
 
 export const AudioPlayerWindow = ({
@@ -79,16 +81,21 @@ export const AudioPlayerWindow = ({
   isPlaying,
   randomiseTrack,
   trackNum,
+  thumbsUp,
+  thumbsDown,
 }) => {
-  return (
-    <WindowContainer>
-      <TestContainer>
-        <p>{text}</p>
-        <IconContainer>
-          <ItFlagIcon />
-        </IconContainer>
-      </TestContainer>
 
+  const completed = "Completed"
+  return (
+    <>
+    <Text>{text}</Text>
+      <TestContainer>
+        
+        {/* <IconContainer>
+          <ItFlagIcon />
+        </IconContainer> */}
+      
+      
       <PlayBackContainer>
         <PlayerContainer>
           <div onClick={togglePlay}>{isPlaying ? <GrPause /> : <GrPlay />}</div>
@@ -96,18 +103,25 @@ export const AudioPlayerWindow = ({
           <GiPerspectiveDiceSixFacesFour onClick={randomiseTrack} />
         </PlayerContainer>
         <VoteContainer>
-          <BiHappyAlt />
-          <FiThumbsUp />
-          <FiThumbsDown />
-          <FaRegSadCry />
+          {/* <BiHappyAlt /> */}
+          <FiThumbsUp onClick={thumbsUp} />
+          <FiThumbsDown onClick={thumbsDown} />
+          {/* <FaRegSadCry /> */}
         </VoteContainer>
+
+        <div>
+          
         <WaveformBars
+          completed={completed}
           trackNum={trackNum}
           audio={audio}
           time={time}
           duration={duration}
         />
-      </PlayBackContainer>
-    </WindowContainer>
+        </div>
+        </PlayBackContainer>
+        <AudioRecorder />
+        </TestContainer>
+    </>
   );
 };

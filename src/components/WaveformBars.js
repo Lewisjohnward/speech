@@ -2,23 +2,31 @@ import { useState, useEffect } from "react";
 import WaveformData from "waveform-data";
 import { scaleLinear, scaleBand, min, max, range } from "d3";
 
-const width = 1200;
-const height = 200;
 
 const margin = {
   top: 10,
-  right: 10,
+  right: 0,
   bottom: 10,
-  left: 10,
+  left: 0,
 };
 
-const innerHeight = height - margin.top - margin.bottom;
-const innerWidth = width - margin.left - margin.right;
-
-const innerHeight1 = innerHeight / 2;
-
-export const WaveformBars = ({ audio, time, duration, trackNum }) => {
+export const WaveformBars = ({
+  audio,
+  time,
+  duration,
+  completed,
+  parentWidth,
+  parentHeight,
+}) => {
   const [waveform, setWaveform] = useState(null);
+
+  const width = parentWidth || 1200;
+  const height = parentHeight || 200;
+
+  const innerHeight = height - margin.top - margin.bottom;
+  const innerWidth = width - margin.left - margin.right;
+
+  const innerHeight1 = innerHeight / 2;
 
   useEffect(() => {
     if (audio) {
@@ -52,16 +60,11 @@ export const WaveformBars = ({ audio, time, duration, trackNum }) => {
   if (!waveform || !audio) {
     return (
       <svg height={height} width={width}>
-        <rect height={height} width={width} stroke="black" fill="none" />
         <g transform={`translate(${margin.left}, ${margin.top})`}>
-          <text className="svg-label">Waveform</text>
-          <rect
-            height={innerHeight}
-            width={innerWidth}
-            stroke="black"
-            strokeWidth={0.05}
-            fill="none"
-          />
+          <text x={innerWidth / 2} y={innerHeight / 2}>
+            {completed}
+          </text>
+          
         </g>
       </svg>
     );
@@ -93,24 +96,9 @@ export const WaveformBars = ({ audio, time, duration, trackNum }) => {
   return (
     <>
       <svg height={height} width={width}>
-        <rect height={height} width={width} stroke="black" fill="none" />
+        
         <g transform={`translate(${margin.left}, ${margin.top})`}>
-          <text
-            x={innerWidth}
-            style={{ textAnchor: "end" }}
-            className="svg-label"
-            opacity={0.4}
-          >
-            {trackNum}
-          </text>
-          <text className="svg-label">Waveform</text>
-          <rect
-            height={innerHeight}
-            width={innerWidth}
-            stroke="black"
-            strokeWidth={0.05}
-            fill="none"
-          />
+          
 
           {max1.map((d, i) => {
             return (
@@ -145,8 +133,9 @@ export const WaveformBars = ({ audio, time, duration, trackNum }) => {
           )}
         </g>
         <text
-          x={width - 35}
+          x={width - 5}
           y={height - 3}
+          style={{ textAnchor: "end" }}
           stroke="darkmagenta"
           opacity={1}
           fontStyle="italic"
